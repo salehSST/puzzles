@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دائرة الحظ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        #wheelCanvas {
+            border: 4px solid #333;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+        #winner {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+        #spinButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #spinButton:hover {
+            background-color: #4cae4c;
+        }
+        input[type="number"], input[type="text"] {
+            font-size: 18px;
+            padding: 10px;
+            margin: 5px 0;
+            width: 200px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            font-size: 18px;
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+        #nameInputs input[type="text"] {
+            display: block;
+            margin: 10px auto;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>دائرة الحظ</h1>
+
+    <label for="numNames">كم عدد الأسماء؟</label>
+    <input type="number" id="numNames" min="1" placeholder="أدخل عدد الأسماء"><br><br>
+
+    <div id="nameInputs"></div>
+    <button onclick="getNames()">أدخل الأسماء</button><br><br>
+
+    <label for="numWinners">كم عدد الفائزين؟</label>
+    <input type="number" id="numWinners" min="1" placeholder="أدخل عدد الفائزين"><br><br>
+
+    <label for="removeWinners">حذف الأسماء الفائزة؟</label>
+    <input type="checkbox" id="removeWinners"><br><br>
+
+    <div id="winner"></div>
+    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+    <button id="spinButton" onclick="spin()">شغّل الدائرة</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
