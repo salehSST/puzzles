@@ -3,81 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دائرة الحظ</title>
+    <title>لعبة الألغاز</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 20px;
         }
-        #wheelCanvas {
-            border: 4px solid #333;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 20px auto;
+
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 5px;
+            width: 100%;
+            height: 100%;
+            max-width: 500px;
+            max-height: 500px;
         }
-        #winner {
+
+        .tile {
+            background-color: #3498db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #333;
-        }
-        #spinButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #5cb85c;
             color: white;
-            border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
+            touch-action: manipulation; /* لضمان استجابة اللمس بشكل جيد */
         }
-        #spinButton:hover {
-            background-color: #4cae4c;
-        }
-        input[type="number"], input[type="text"] {
-            font-size: 18px;
-            padding: 10px;
-            margin: 5px 0;
-            width: 200px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-        }
-        label {
-            font-size: 18px;
-            margin-top: 10px;
-            display: block;
-            color: #333;
-        }
-        #nameInputs input[type="text"] {
-            display: block;
-            margin: 10px auto;
-            width: 80%;
+
+        .empty {
+            background-color: transparent;
+            cursor: default;
         }
     </style>
 </head>
 <body>
-    <h1>دائرة الحظ</h1>
-
-    <label for="numNames">كم عدد الأسماء؟</label>
-    <input type="number" id="numNames" min="1" placeholder="أدخل عدد الأسماء"><br><br>
-
-    <div id="nameInputs"></div>
-    <button onclick="getNames()">أدخل الأسماء</button><br><br>
-
-    <label for="numWinners">كم عدد الفائزين؟</label>
-    <input type="number" id="numWinners" min="1" placeholder="أدخل عدد الفائزين"><br><br>
-
-    <label for="removeWinners">حذف الأسماء الفائزة؟</label>
-    <input type="checkbox" id="removeWinners"><br><br>
-
-    <div id="winner"></div>
-    <canvas id="wheelCanvas" width="500" height="500"></canvas>
-    <button id="spinButton" onclick="spin()">شغّل الدائرة</button>
-
-    <script src="script.js"></script>
+    <div id="gameBoard">
+        <div class="tile">1</div>
+        <div class="tile">2</div>
+        <div class="tile">3</div>
+        <div class="tile">4</div>
+        <div class="tile">5</div>
+        <div class="tile">6</div>
+        <div class="tile">7</div>
+        <div class="tile">8</div>
+        <div class="tile">9</div>
+        <div class="tile">10</div>
+        <div class="tile">11</div>
+        <div class="tile">12</div>
+        <div class="tile">13</div>
+        <div class="tile">14</div>
+        <div class="tile">15</div>
+        <div class="tile empty"></div>
+    </div>
 </body>
 </html>
-
