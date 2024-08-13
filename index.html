@@ -1,67 +1,45 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الألغاز</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
+const tiles = Array.from(document.querySelectorAll('.tile'));
+const gameBoard = document.getElementById('gameBoard');
+let emptyTile = document.querySelector('.empty');
 
-        #gameBoard {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 5px;
-            width: 100%;
-            height: 100%;
-            max-width: 500px;
-            max-height: 500px;
-        }
+tiles.forEach(tile => {
+    tile.addEventListener('touchstart', handleTouchStart);
+});
 
-        .tile {
-            background-color: #3498db;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            touch-action: manipulation; /* لضمان استجابة اللمس بشكل جيد */
-        }
+function handleTouchStart(e) {
+    const tile = e.target;
+    const tileIndex = tiles.indexOf(tile);
+    const emptyIndex = tiles.indexOf(emptyTile);
 
-        .empty {
-            background-color: transparent;
-            cursor: default;
-        }
-    </style>
-</head>
-<body>
-    <div id="gameBoard">
-        <div class="tile">1</div>
-        <div class="tile">2</div>
-        <div class="tile">3</div>
-        <div class="tile">4</div>
-        <div class="tile">5</div>
-        <div class="tile">6</div>
-        <div class="tile">7</div>
-        <div class="tile">8</div>
-        <div class="tile">9</div>
-        <div class="tile">10</div>
-        <div class="tile">11</div>
-        <div class="tile">12</div>
-        <div class="tile">13</div>
-        <div class="tile">14</div>
-        <div class="tile">15</div>
-        <div class="tile empty"></div>
-    </div>
-</body>
-</html>
+    if (canMove(tileIndex, emptyIndex)) {
+        swapTiles(tile, emptyTile);
+    }
+}
+
+function canMove(tileIndex, emptyIndex) {
+    const rowSize = 4;
+    const isAdjacent =
+        tileIndex === emptyIndex - 1 && emptyIndex % rowSize !== 0 ||
+        tileIndex === emptyIndex + 1 && tileIndex % rowSize !== 0 ||
+        tileIndex === emptyIndex - rowSize ||
+        tileIndex === emptyIndex + rowSize;
+
+    return isAdjacent;
+}
+
+function swapTiles(tile, emptyTile) {
+    const tempOrder = tile.style.order;
+    tile.style.order = emptyTile.style.order;
+    emptyTile.style.order = tempOrder;
+
+    // Swap positions in the array
+    const tileIndex = tiles.indexOf(tile);
+    const emptyIndex = tiles.indexOf(emptyTile);
+    tiles[tileIndex] = emptyTile;
+    tiles[emptyIndex] = tile;
+}
+
+// Ensure the order property is set on all tiles
+tiles.forEach((tile, index) => {
+    tile.style.order = index;
+});
